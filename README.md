@@ -1,1 +1,2 @@
-# Empty
+# Description
+Dependencyless string builder implementation.
