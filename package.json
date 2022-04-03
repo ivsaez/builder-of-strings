@@ -1,0 +1,16 @@
+{
+  "name": "builder-of-strings",
+  "version": "1.0.0",
+  "description": "Dependencyless string builder implementation.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "dependencyless",
+    "string",
+    "builder"
+  ],
+  "author": "Ivan Saez Zamora",
+  "license": "MIT"
+}
