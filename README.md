@@ -6,3 +6,7 @@ It accepts the following methods on a StringBuildable type formed by string, num
 - appendWhen
 - appendLine
 - appendLineWhen
+- appendSequence
+- appendSequenceLines
+- appendSequenceWhen
+- appendSequenceLinesWhen

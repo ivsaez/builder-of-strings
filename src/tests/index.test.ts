@@ -54,4 +54,46 @@ describe("StringBuilder should", () => {
 
     expect(builder.toString()).toBe(`${StringBuilder.Line}a${StringBuilder.Line}a`);
   });
+
+  it("append a sequence of elements", () => {
+    let elements = [ "a", "b", "c" ];
+
+    builder
+      .appendSequence(elements);
+
+    expect(builder.toString()).toBe("abc");
+  });
+
+  it("append a sequence of elements in different lines", () => {
+    let elements = [ "a", "b", "c" ];
+
+    builder
+      .appendSequenceLines(elements);
+
+    expect(builder.toString()).toBe(`${StringBuilder.Line}a${StringBuilder.Line}b${StringBuilder.Line}c`);
+  });
+
+  it("append a sequence of elements when a condition is met", () => {
+    let trueCondition = true;
+    let falseCondition = false;
+    let elements = [ "a", "b", "c" ];
+
+    builder
+      .appendSequenceWhen(() => trueCondition, elements)
+      .appendSequenceWhen(() => falseCondition, elements);
+
+    expect(builder.toString()).toBe("abc");
+  });
+
+  it("append a sequence of elements in different lines when a condition is met", () => {
+    let trueCondition = true;
+    let falseCondition = false;
+    let elements = [ "a", "b", "c" ];
+
+    builder
+      .appendSequenceLinesWhen(() => trueCondition, elements)
+      .appendSequenceLinesWhen(() => falseCondition, elements);
+
+    expect(builder.toString()).toBe(`${StringBuilder.Line}a${StringBuilder.Line}b${StringBuilder.Line}c`);
+  });
 });

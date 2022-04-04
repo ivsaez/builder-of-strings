@@ -38,6 +38,42 @@ export class StringBuilder{
     return this;
   }
 
+  appendSequence(sequence: StringBuildable[]): StringBuilder{
+    if(this.isValidSequence(sequence)){
+      for(let element of sequence){
+        this.append(element);
+      }
+    }
+
+    return this;
+  }
+
+  appendSequenceLines(sequence: StringBuildable[]): StringBuilder{
+    if(this.isValidSequence(sequence)){
+      for(let element of sequence){
+        this.appendLine(element);
+      }
+    }
+
+    return this;
+  }
+
+  appendSequenceWhen(condition: () => boolean, sequence: StringBuildable[]): StringBuilder{
+    if(this.isValidCondition(condition)){
+      return this.appendSequence(sequence);
+    }
+
+    return this;
+  }
+
+  appendSequenceLinesWhen(condition: () => boolean, sequence: StringBuildable[]): StringBuilder{
+    if(this.isValidCondition(condition)){
+      return this.appendSequenceLines(sequence);
+    }
+
+    return this;
+  }
+
   clear(): void{
     this._items = [];
   }
@@ -60,5 +96,9 @@ export class StringBuilder{
 
   private isValidCondition(condition: () => boolean): boolean{
     return condition != null && condition();
+  }
+
+  private isValidSequence(sequence: StringBuildable[]): boolean{
+    return sequence != null && sequence.length > 0;
   }
 }
