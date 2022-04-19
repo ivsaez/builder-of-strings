@@ -78,16 +78,43 @@ export class StringBuilder{
     this._items = [];
   }
 
-  toString(): string{
+  toString(forWeb: boolean = false): string{
     return this._items.length === 0
       ? ""
-      : this._items.join("");
+      : forWeb
+        ? this.toWebString()
+        : this._items.join("");
+  }
+
+  private toWebString(): string{
+    let lastLine = null;
+    let transformedItems: string[] = [];
+    let expectedLine = StringBuilder.Line;
+
+    for(let item of this._items){
+      if(item === expectedLine && lastLine !== null){
+        transformedItems.push(`<p>${lastLine}</p>`);
+        lastLine = null;
+      }
+      else{
+        lastLine = lastLine === null 
+          ? item 
+          : lastLine + item;
+      }
+    }
+
+    if(lastLine !== null)
+      transformedItems.push(`<p>${lastLine}</p>`);
+
+    return transformedItems.join("");
   }
 
   static get Line(): string{
-    return process.platform === "win32"
-      ? "\r\n"
-      : "\n";
+    return process == null
+      ? "\n"
+      : process.platform === "win32"
+        ? "\r\n"
+        : "\n";
   }
 
   private isValidInput(input: StringBuildable): boolean{

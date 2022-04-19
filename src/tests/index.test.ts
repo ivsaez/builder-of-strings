@@ -96,4 +96,13 @@ describe("StringBuilder should", () => {
 
     expect(builder.toString()).toBe(`${StringBuilder.Line}a${StringBuilder.Line}b${StringBuilder.Line}c`);
   });
+
+  it("return a string for web", () => {
+    builder
+      .append("a")
+      .append("b")
+      .appendLine("c");
+
+    expect(builder.toString(true)).toBe("<p>ab</p><p>c</p>");
+  });
 });
